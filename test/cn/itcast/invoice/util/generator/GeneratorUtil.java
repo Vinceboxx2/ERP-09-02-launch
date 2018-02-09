@@ -137,7 +137,7 @@ public class GeneratorUtil {
             System.out.println("File not found");
           } 
 		 finally {
-	           if (f != null) {
+	           if (bw != null) {
 	             try {
 	               bw.close(); // OK
 	             } catch (java.io.IOException e3) {
@@ -152,13 +152,16 @@ public class GeneratorUtil {
 	//7.ç”Ÿæˆ�Action
 	private void generatorAction() throws Exception{
 		//1.åˆ›å»ºæ–‡ä»¶
-		File f = new File(rootDir+"/web/"+big+"Action.java");
+		File f = null;
+		BufferedWriter bw= null;
+		try {
+		f = new File(rootDir+"/web/"+big+"Action.java");
 		if(f.exists()){
 			return;
 		}
 		f.createNewFile();
 		
-		BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+		bw = new BufferedWriter(new FileWriter(f));
 		
 		bw.write("package "+pkg+".web;");
 		bw.newLine();
@@ -305,17 +308,32 @@ public class GeneratorUtil {
 		bw.newLine();
 
 		bw.flush();
-		bw.close();
+		}
+		catch (java.io.FileNotFoundException e1) {
+            System.out.println("File not found");
+          } 
+		 finally {
+	           if (bw != null) {
+	             try {
+	               bw.close(); // OK
+	             } catch (java.io.IOException e3) {
+	               System.out.println("I/O Exception");
+	             }
+	           }
+	         }
 	}
 	//6.ç”Ÿæˆ�Ebo
 	private void generatorEbo() throws Exception{
-		File f = new File(rootDir+"/business/ebo/"+big+"Ebo.java");
+		File f = null;
+		BufferedWriter bw= null;
+		try {
+		f =  new File(rootDir+"/business/ebo/"+big+"Ebo.java");
 		if(f.exists()){
 			return;
 		}
 		f.createNewFile();
 		
-		BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+		bw = new BufferedWriter(new FileWriter(f));
 		
 		bw.write("package "+pkg+".business.ebo;");
 		bw.newLine();
@@ -445,19 +463,34 @@ public class GeneratorUtil {
 		bw.newLine();
 		
 		bw.flush();
-		bw.close();
+		}
+		catch (java.io.FileNotFoundException e1) {
+            System.out.println("File not found");
+          } 
+		 finally {
+	           if (bw != null) {
+	             try {
+	               bw.close(); // OK
+	             } catch (java.io.IOException e3) {
+	               System.out.println("I/O Exception");
+	             }
+	           }
+	         }
 
 	}
 	//5.ç”Ÿæˆ�Ebi
 	private void generatorEbi() throws Exception{
 		//1.åˆ›å»ºæ–‡ä»¶
-		File f = new File(rootDir+"/business/ebi/"+big+"Ebi.java");
+		File f = null;
+		BufferedWriter bw= null;
+		try {
+		f = new File(rootDir+"/business/ebi/"+big+"Ebi.java");
 		if(f.exists()){
 			return;
 		}
 		f.createNewFile();
 		
-		BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+		bw = new BufferedWriter(new FileWriter(f));
 		
 		bw.write("package "+pkg+".business.ebi;");
 		bw.newLine();
@@ -487,18 +520,34 @@ public class GeneratorUtil {
 		bw.newLine();
 		
 		bw.flush();
-		bw.close();
+		}
+		catch (java.io.FileNotFoundException e1) {
+            System.out.println("File not found");
+          } 
+		 finally {
+	           if (bw != null) {
+	             try {
+	               bw.close(); // OK
+	             } catch (java.io.IOException e3) {
+	               System.out.println("I/O Exception");
+	             }
+	           }
+	         }
+		
 	}
 	//4.ç”Ÿæˆ�DaoImpl
 	private void generatorDaoImpl() throws Exception{
 		//1.åˆ›å»ºæ–‡ä»¶
-		File f = new File(rootDir+"/dao/impl/"+big+"DaoImpl.java");
+		File f = null;
+		BufferedWriter bw= null;
+		try {
+		f = new File(rootDir+"/dao/impl/"+big+"DaoImpl.java");
 		if(f.exists()){
 			return;
 		}
 		f.createNewFile();
 		
-		BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+		bw = new BufferedWriter(new FileWriter(f));
 		
 		bw.write("package "+pkg+".dao.impl;");
 		bw.newLine();
@@ -549,19 +598,34 @@ public class GeneratorUtil {
 		bw.newLine();
 		
 		bw.flush();
-		bw.close();
+		}
+		catch (java.io.FileNotFoundException e1) {
+            System.out.println("File not found");
+          } 
+		 finally {
+	           if (bw != null) {
+	             try {
+	               bw.close(); // OK
+	             } catch (java.io.IOException e3) {
+	               System.out.println("I/O Exception");
+	             }
+	           }
+	         }
 		
 	}
 	//3.ç”Ÿæˆ�Dao
 	private void generatorDao() throws Exception{
 		//1.åˆ›å»ºæ–‡ä»¶
-		File f = new File(rootDir+"/dao/dao/"+big+"Dao.java");
+		File f = null;
+		BufferedWriter bw= null;
+		try {
+		f = new File(rootDir+"/dao/dao/"+big+"Dao.java");
 		if(f.exists()){
 			return;
 		}
 		f.createNewFile();
 		
-		BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+		bw = new BufferedWriter(new FileWriter(f));
 		
 		bw.write("package "+pkg+".dao.dao;");
 		bw.newLine();
@@ -583,18 +647,34 @@ public class GeneratorUtil {
 		bw.newLine();
 		
 		bw.flush();
-		bw.close();
+		}
+		catch (java.io.FileNotFoundException e1) {
+            System.out.println("File not found");
+          } 
+		 finally {
+	           if (bw != null) {
+	             try {
+	               bw.close(); // OK
+	             } catch (java.io.IOException e3) {
+	               System.out.println("I/O Exception");
+	             }
+	           }
+	         }
+		
 		
 	}
 	//2.ç”Ÿæˆ�Model.hbm.xml
 	private void generatorHbmXml() throws Exception{
-		File f = new File(rootDir+"/vo/"+big+"Model.hbm.xml");
+		File f = null;
+		BufferedWriter bw= null;
+		try {
+		f = new File(rootDir+"/vo/"+big+"Model.hbm.xml");
 		if(f.exists()){
 			return;
 		}
 		f.createNewFile();
 		
-		BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+		bw = new BufferedWriter(new FileWriter(f));
 		
 		bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		bw.newLine();
@@ -649,7 +729,20 @@ public class GeneratorUtil {
 		bw.write("</hibernate-mapping>");
 		
 		bw.flush();
-		bw.close();
+	}
+	catch (java.io.FileNotFoundException e1) {
+        System.out.println("File not found");
+      } 
+	 finally {
+           if (bw != null) {
+             try {
+               bw.close(); // OK
+             } catch (java.io.IOException e3) {
+               System.out.println("I/O Exception");
+             }
+           }
+         }
+	
 		
 	}
 /*
@@ -660,13 +753,16 @@ public class GeneratorUtil {
 	//1.ç”Ÿæˆ�QueryModel
 	private void generatorQueryModel() throws Exception {
 		//1.åˆ›å»ºæ–‡ä»¶
-		File f = new File(rootDir+"/vo/"+big+"QueryModel.java");
+		File f = null;
+		BufferedWriter bw= null;
+		try {
+		f = new File(rootDir+"/vo/"+big+"QueryModel.java");
 		if(f.exists()){
 			return;
 		}
 		f.createNewFile();
 		
-		BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+		bw = new BufferedWriter(new FileWriter(f));
 		
 		bw.write("package "+pkg+".vo;");
 		bw.newLine();
@@ -688,8 +784,20 @@ public class GeneratorUtil {
 		bw.newLine();
 		
 		bw.flush();
-		bw.close();
-		
+		}
+		catch (java.io.FileNotFoundException e1) {
+	        System.out.println("File not found");
+	      } 
+		 finally {
+	           if (bw != null) {
+	             try {
+	               bw.close(); // OK
+	             } catch (java.io.IOException e3) {
+	               System.out.println("I/O Exception");
+	             }
+	           }
+	         }
+				
 	}
 
 	//0.ç”Ÿæˆ�ä¿�å­˜æ–‡ä»¶çš„ç›®å½•
