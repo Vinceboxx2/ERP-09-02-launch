@@ -11,8 +11,8 @@ import cn.itcast.invoice.invoice.storedetail.vo.StoreDetailModel;
 public class GeneratorUtil {
 	
 	public static void main(String[] args) throws Exception {
-		//依赖Model生成若干个文件
-		//执行某个方法，就生成对应的所有代码，方法要携带Class
+		//ä¾�èµ–Modelç”Ÿæˆ�è‹¥å¹²ä¸ªæ–‡ä»¶
+		//æ‰§è¡ŒæŸ�ä¸ªæ–¹æ³•ï¼Œå°±ç”Ÿæˆ�å¯¹åº”çš„æ‰€æœ‰ä»£ç �ï¼Œæ–¹æ³•è¦�æ�ºå¸¦Class
 		//EmpModel,RoleModel,ResModel,MenuModel
 		//SupplierModel,GoodsTypeModel,GoodsModel
 		//OrderModel,OrderDetailModel
@@ -36,40 +36,41 @@ public class GeneratorUtil {
 	*/
 	public GeneratorUtil(Class clazz)throws Exception{
 		this.clazz = clazz;
-		//-1.数据初始化
+		//-1.æ•°æ�®åˆ�å§‹åŒ–
 		dataInit();
-		//0.生成保存文件的目录
+		//0.ç”Ÿæˆ�ä¿�å­˜æ–‡ä»¶çš„ç›®å½•
 		genderatorDirectories();
-		//1.生成QueryModel
+		//1.ç”Ÿæˆ�QueryModel
 		generatorQueryModel();
-		//2.生成Model.hbm.xml
+		//2.ç”Ÿæˆ�Model.hbm.xml
 		generatorHbmXml();
-		//3.生成Dao
+		//3.ç”Ÿæˆ�Dao
 		generatorDao();
-		//4.生成DaoImpl
+		//4.ç”Ÿæˆ�DaoImpl
 		generatorDaoImpl();
-		//5.生成Ebi
+		//5.ç”Ÿæˆ�Ebi
 		generatorEbi();
-		//6.生成Ebo
+		//6.ç”Ÿæˆ�Ebo
 		generatorEbo();
-		//7.生成Action
+		//7.ç”Ÿæˆ�Action
 		generatorAction();
-		//8.生成applicationContext.xml
+		//8.ç”Ÿæˆ�applicationContext.xml
 		generatorApplicationContextXml();
-		//9.生成struts.xml
+		//9.ç”Ÿæˆ�struts.xml
 	}
 	
-	//8.生成applicationContext.xml
+	//8.ç”Ÿæˆ�applicationContext.xml
 	private void generatorApplicationContextXml() throws Exception{
-		//1.创建文件
-		File f = new File("resources/applicationContext-"+small+".xml");
+		//1.åˆ›å»ºæ–‡ä»¶
+		File f = null;
+		BufferedWriter bw= null;
+		try {
+		f = new File("resources/applicationContext-"+small+".xml");
 		if(f.exists()){
 			return;
 		}
 		f.createNewFile();
-		
-		BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-		
+		bw = new BufferedWriter(new FileWriter(f));
 		bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		bw.newLine();
 
@@ -131,11 +132,26 @@ public class GeneratorUtil {
 		bw.newLine();
 		
 		bw.flush();
-		bw.close();
+		}
+		catch (java.io.FileNotFoundException e1) {
+            System.out.println("File not found");
+          } 
+		 finally {
+	           if (f != null) {
+	             try {
+	               bw.close(); // OK
+	             } catch (java.io.IOException e3) {
+	               System.out.println("I/O Exception");
+	             }
+	           }
+	         }
+		
+		
+		
 	}
-	//7.生成Action
+	//7.ç”Ÿæˆ�Action
 	private void generatorAction() throws Exception{
-		//1.创建文件
+		//1.åˆ›å»ºæ–‡ä»¶
 		File f = new File(rootDir+"/web/"+big+"Action.java");
 		if(f.exists()){
 			return;
@@ -193,7 +209,7 @@ public class GeneratorUtil {
 		
 		bw.newLine();
 		
-		bw.write("	//跳转到列表页面");
+		bw.write("	//è·³è½¬åˆ°åˆ—è¡¨é¡µé�¢");
 		bw.newLine();
 		
 		bw.write("	public String list(){");
@@ -216,7 +232,7 @@ public class GeneratorUtil {
 		
 		bw.newLine();
 		
-		bw.write("	//保存/修改");
+		bw.write("	//ä¿�å­˜/ä¿®æ”¹");
 		bw.newLine();
 		
 		bw.write("	public String save(){");
@@ -245,7 +261,7 @@ public class GeneratorUtil {
 		
 		bw.newLine();
 		
-		bw.write("	//跳转到添加/修改页面");
+		bw.write("	//è·³è½¬åˆ°æ·»åŠ /ä¿®æ”¹é¡µé�¢");
 		bw.newLine();
 		
 		bw.write("	public String input(){");
@@ -268,7 +284,7 @@ public class GeneratorUtil {
 		
 		bw.newLine();
 		
-		bw.write("	//删除");
+		bw.write("	//åˆ é™¤");
 		bw.newLine();
 		
 		bw.write("	public String delete(){");
@@ -291,7 +307,7 @@ public class GeneratorUtil {
 		bw.flush();
 		bw.close();
 	}
-	//6.生成Ebo
+	//6.ç”Ÿæˆ�Ebo
 	private void generatorEbo() throws Exception{
 		File f = new File(rootDir+"/business/ebo/"+big+"Ebo.java");
 		if(f.exists()){
@@ -432,9 +448,9 @@ public class GeneratorUtil {
 		bw.close();
 
 	}
-	//5.生成Ebi
+	//5.ç”Ÿæˆ�Ebi
 	private void generatorEbi() throws Exception{
-		//1.创建文件
+		//1.åˆ›å»ºæ–‡ä»¶
 		File f = new File(rootDir+"/business/ebi/"+big+"Ebi.java");
 		if(f.exists()){
 			return;
@@ -473,9 +489,9 @@ public class GeneratorUtil {
 		bw.flush();
 		bw.close();
 	}
-	//4.生成DaoImpl
+	//4.ç”Ÿæˆ�DaoImpl
 	private void generatorDaoImpl() throws Exception{
-		//1.创建文件
+		//1.åˆ›å»ºæ–‡ä»¶
 		File f = new File(rootDir+"/dao/impl/"+big+"DaoImpl.java");
 		if(f.exists()){
 			return;
@@ -523,7 +539,7 @@ public class GeneratorUtil {
 		bw.write("		"+big+"QueryModel "+little+"qm = ("+big+"QueryModel) qm;");
 		bw.newLine();
 		
-		bw.write("		//TODO 添加自定义查询规则");
+		bw.write("		//TODO æ·»åŠ è‡ªå®šä¹‰æŸ¥è¯¢è§„åˆ™");
 		bw.newLine();
 		
 		bw.write("	}");
@@ -536,9 +552,9 @@ public class GeneratorUtil {
 		bw.close();
 		
 	}
-	//3.生成Dao
+	//3.ç”Ÿæˆ�Dao
 	private void generatorDao() throws Exception{
-		//1.创建文件
+		//1.åˆ›å»ºæ–‡ä»¶
 		File f = new File(rootDir+"/dao/dao/"+big+"Dao.java");
 		if(f.exists()){
 			return;
@@ -570,7 +586,7 @@ public class GeneratorUtil {
 		bw.close();
 		
 	}
-	//2.生成Model.hbm.xml
+	//2.ç”Ÿæˆ�Model.hbm.xml
 	private void generatorHbmXml() throws Exception{
 		File f = new File(rootDir+"/vo/"+big+"Model.hbm.xml");
 		if(f.exists()){
@@ -608,14 +624,14 @@ public class GeneratorUtil {
 		
 		bw.write("        </id>");
 		bw.newLine();
-		//循环生成
-		//需要获取所有的字段名
+		//å¾ªçŽ¯ç”Ÿæˆ�
+		//éœ€è¦�èŽ·å�–æ‰€æœ‰çš„å­—æ®µå��
 		Field[] fields = clazz.getDeclaredFields();
 		for(Field fd:fields){
-			//如果是私有的生成
+			//å¦‚æžœæ˜¯ç§�æœ‰çš„ç”Ÿæˆ�
 			if(fd.getModifiers() == Modifier.PRIVATE){
 				if(!fd.getName().endsWith("View") && !fd.getName().equals("uuid")){
-					//满足Long,Double,Integer,String的生成
+					//æ»¡è¶³Long,Double,Integer,Stringçš„ç”Ÿæˆ�
 					if(fd.getType().equals(Long.class)
 							||fd.getType().equals(Double.class)
 							||fd.getType().equals(Integer.class)
@@ -641,9 +657,9 @@ public class GeneratorUtil {
 "+small+"
 "+pkg+"
 */
-	//1.生成QueryModel
+	//1.ç”Ÿæˆ�QueryModel
 	private void generatorQueryModel() throws Exception {
-		//1.创建文件
+		//1.åˆ›å»ºæ–‡ä»¶
 		File f = new File(rootDir+"/vo/"+big+"QueryModel.java");
 		if(f.exists()){
 			return;
@@ -665,7 +681,7 @@ public class GeneratorUtil {
 		bw.write("public class "+big+"QueryModel extends "+big+"Model implements BaseQueryModel{");
 		bw.newLine();
 		
-		bw.write("	//TODO 请添加自定义查询条件字段");
+		bw.write("	//TODO è¯·æ·»åŠ è‡ªå®šä¹‰æŸ¥è¯¢æ�¡ä»¶å­—æ®µ");
 		bw.newLine();
 		
 		bw.write("}");
@@ -676,9 +692,9 @@ public class GeneratorUtil {
 		
 	}
 
-	//0.生成保存文件的目录
+	//0.ç”Ÿæˆ�ä¿�å­˜æ–‡ä»¶çš„ç›®å½•
 	private void genderatorDirectories() {
-		//创建所有文件的保存目录
+		//åˆ›å»ºæ‰€æœ‰æ–‡ä»¶çš„ä¿�å­˜ç›®å½•
 		//web
 		File f = new File(rootDir+"/web");
 		f.mkdirs();
@@ -696,7 +712,7 @@ public class GeneratorUtil {
 		f.mkdirs();
 	}
 	
-	//-1.数据初始化
+	//-1.æ•°æ�®åˆ�å§‹åŒ–
 	private void dataInit() {
 		//pkg;
 		String allPkg = clazz.getPackage().getName();
