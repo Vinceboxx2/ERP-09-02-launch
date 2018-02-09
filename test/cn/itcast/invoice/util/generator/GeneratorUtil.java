@@ -709,14 +709,9 @@ public class GeneratorUtil {
 		Field[] fields = clazz.getDeclaredFields();
 		for(Field fd:fields){
 			//Ã¥Â¦â€šÃ¦Å¾Å“Ã¦ËœÂ¯Ã§Â§ï¿½Ã¦Å“â€°Ã§Å¡â€žÃ§â€�Å¸Ã¦Ë†ï¿½
-			if(fd.getModifiers() == Modifier.PRIVATE){
-				if(!fd.getName().endsWith("View") && !fd.getName().equals("uuid")){
-					//Ã¦Â»Â¡Ã¨Â¶Â³Long,Double,Integer,StringÃ§Å¡â€žÃ§â€�Å¸Ã¦Ë†ï¿½
-					if (check(fd)) {
-					bw.write("        <property name=\""+fd.getName()+"\"/>");
-					bw.newLine();}
-				}
-			}
+			if (check(fd)) {
+			bw.write("        <property name=\""+fd.getName()+"\"/>");
+			bw.newLine();}
 		}
 		
 		bw.write("    </class>");
@@ -834,12 +829,16 @@ public class GeneratorUtil {
 	
 	private boolean check(Field fd) {
 		boolean checked = false;
-		if(fd.getType().equals(Long.class)
-				||fd.getType().equals(Double.class)
-				||fd.getType().equals(Integer.class)
-				||fd.getType().equals(String.class)
-				) {
-			checked = true;
+		if(fd.getModifiers() == Modifier.PRIVATE){
+			if(!fd.getName().endsWith("View") && !fd.getName().equals("uuid")){
+				//Ã¦Â»Â¡Ã¨Â¶Â³Long,Double,Integer,StringÃ§Å¡â€žÃ§â€�Å¸Ã¦Ë†ï¿½
+				if(fd.getType().equals(Long.class)
+						||fd.getType().equals(Double.class)
+						||fd.getType().equals(Integer.class)
+						||fd.getType().equals(String.class)
+						)  { checked= true;
+				}
+			}
 		}
 		return checked;
 	}
